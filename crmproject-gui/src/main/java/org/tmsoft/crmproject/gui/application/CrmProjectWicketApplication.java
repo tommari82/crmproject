@@ -28,6 +28,7 @@ public class CrmProjectWicketApplication extends WebApplication {
 		setRootRequestMapper(new CryptoMapper(getRootRequestMapper(), this));
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this));
 
+		mountPage("/", getHomePage());
 		// add your configuration here
 	}
 }
