@@ -17,8 +17,11 @@
 
 
     <properties>
-        <wicket.version>6.16.0</wicket.version>
-	    <jetty.version>8.1.15.v20140411</jetty.version>
+	    <java.source>1.7</java.source>
+	    <java.target>1.7</java.target>
+	    <java.encoding>UTF-8</java.encoding>
+	    <wicket.version>6.16.0</wicket.version>
+	    <jetty.version>9.2.2.v20140723</jetty.version>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.0.6.RELEASE</spring.version>
 	    <spring-data-jpa.version>1.6.2.RELEASE</spring-data-jpa.version>
@@ -229,10 +232,30 @@
 	        <!--  JETTY DEPENDENCIES FOR TESTING  -->
             <dependency>
                 <groupId>org.eclipse.jetty.aggregate</groupId>
-                <artifactId>jetty-all-server</artifactId>
-                <version>${jetty.version}</version>
-                <scope>provided</scope>
+	            <artifactId>jetty-all</artifactId>
+	            <version>${jetty.version}</version>
+	            <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<inherited>true</inherited>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>${java.source}</source>
+						<target>${java.target}</target>
+						<encoding>${java.encoding}</encoding>
+						<showWarnings>true</showWarnings>
+						<showDeprecation>true</showDeprecation>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>

@@ -2,11 +2,7 @@ package org.tmsoft.gui;
 
 import org.apache.wicket.util.time.Duration;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.bio.SocketConnector;
-import org.eclipse.jetty.server.ssl.SslSocketConnector;
-import org.eclipse.jetty.util.resource.Resource;
-import org.eclipse.jetty.util.ssl.SslContextFactory;
-import org.eclipse.jetty.webapp.Configuration;
+import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class Start {
@@ -14,11 +10,11 @@ public class Start {
         int timeout = (int) Duration.ONE_HOUR.getMilliseconds();
 
         Server server = new Server();
-        SocketConnector connector = new SocketConnector();
+	    ServerConnector connector = new ServerConnector(server);
 
         // Set some timeout options to make debugging easier.
-        connector.setMaxIdleTime(timeout);
-        connector.setSoLingerTime(-1);
+	    connector.setIdleTimeout(timeout);
+	    connector.setSoLingerTime(-1);
         connector.setPort(8087);
         server.addConnector(connector);
 
